@@ -1,0 +1,35 @@
+---
+import site from "@/site"
+---
+
+<header  class="antialiased fixed top-0 w-screen z-10 border-b-2 border-blue-500" hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML transition:true">
+    <nav class="bg-white border-gray-200 dark:bg-gray-800" >
+       <ul class="flex">
+        <li>
+            <a href="/about#" class="text-gray-900 dark:text-gray-100">About</a>
+        </li>
+        <li>
+            <a href="/blog#" class="text-gray-900 dark:text-gray-100">Code Blog</a>
+        </li>
+        <li>
+            <a href="/contact#" class="text-gray-900 dark:text-gray-100">Contact</a>
+        </li>
+       </ul>
+    </nav>
+  </header>
+<script>
+    const nav = document.querySelector('nav') as HTMLElement
+    const navItems = [...nav.querySelectorAll('a')] as HTMLAnchorElement[]
+    navItems.forEach(item => {
+        item.onclick = (e) => {
+            e.preventDefault()
+            const href = item.getAttribute('href')
+            const iscurrent = window.location.pathname === href
+            if (iscurrent) return;
+            nav.querySelector('.active')?.classList.remove('active');
+            requestAnimationFrame(() => {
+                item.classList.add('active')    
+            });
+        }
+    });
+</script>

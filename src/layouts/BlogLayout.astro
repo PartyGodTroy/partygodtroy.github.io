@@ -1,0 +1,13 @@
+---
+import Hero from "../components/Hero.astro";
+import Layout from "./Layout.astro";
+---
+
+<Layout>
+    <Hero h1="Ventroy Rolle" content="Web Developer">
+		<div slot="image-section">
+			<img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+		</div>
+	</Hero>
+    <slot></slot>
+</Layout>
