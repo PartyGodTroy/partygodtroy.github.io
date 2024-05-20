@@ -1,0 +1,25 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import type { Post } from "@/site"
+
+
+export const post:Post = {
+    title: 'Hello World',
+    description: 'gravida at, tempus sit amet, tempus id, eros. Vestibulum quis leo risus. Sed ut sapien. Nam tempus. Suspendisse sit amet ligula',
+    tags: ['example', 'component'],
+    slug: 'first-post',
+    date: Date.now(),
+    featured_img: {
+        url: "https://picsum.photos/300/200",
+        alt: "A random image from picsum",
+        width: 300,
+        height: 200
+    },
+}
+
+---
+
+<BlogLayout post={post}>
+    
+</BlogLayout>

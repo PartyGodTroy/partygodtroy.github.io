@@ -3,15 +3,55 @@ import Hero from "../components/Hero.astro";
 import Bio from "../components/Bio.astro";
 import Layout from "../layouts/Layout.astro";
 import Sidebar from "@/layouts/Header.astro";
+import Slider from "@/components/Slider.astro";
+import Slide from "@/components/Slide.astro";
+import BioSpot from "@/components/BioSpot.astro";
+
 
 
 ---
+<style is:global>
+	.hero:has(.cover){
+		position:relative;
+		&:after{
+			content: "";
+			position:absolute;
+			top:0;
+			left:0;
+			width:100%;
+			height:100%;
+			background-image:url(/titleshot.jpg); 
+			background-position:  center -200px;
+			background-size: auto 100vw; 
+			object-fit:contain;
+			opacity:0.2;
+			@media (max-width: 768px){
+				background-position: top;; 
+				
+			}
 
+		}
+	}
+</style>
 <Layout>
-	<Hero h1="Ventroy Rolle" content="Web Developer">
+	<Hero h1="Ventroy Rolle" content="Web Developer" class="cover">
 		<div slot="image-section">
-			<img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+			<!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
 		</div>
 	</Hero>
-	<Bio></Bio>
+
+	<Bio>
+		<BioSpot title=".Net" color="dodgerblue" percent={60}></BioSpot>
+		<BioSpot title="Node" color="red" percent={60}></BioSpot>
+		<BioSpot title="Python" color="cornflowerblue" percent={60}></BioSpot>
+		<BioSpot title="PHP" color="red" percent={60}></BioSpot>
+		<BioSpot title="SQL" color="red" percent={60}></BioSpot>
+
+	</Bio>
+
+	<Slider>
+		<Slide title="Front End" img_url="https://picsum.photos/400/500"></Slide>
+		<Slide title="Back End" img_url="https://picsum.photos/400/500"></Slide>
+		<Slide title="Platforms / Tools" img_url="https://picsum.photos/400/500"></Slide>
+	</Slider>
 </Layout>	

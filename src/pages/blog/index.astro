@@ -2,17 +2,86 @@
 import Hero from "@/components/Hero.astro";
 import Bio from "@/components/Bio.astro";
 import Layout from "@/layouts/Layout.astro";
+import BlogPost from "@/components/BlogPost.astro";
+import BlogPostPreview from "@/components/BlogPostPreview.astro";
+import type { Post } from "@/site";
 
+const posts = (await Astro.glob("./posts/*.astro")).map((v) => (v as any).post as Post);
+const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexOf(v) === i).sort()
 
 ---
 
 <Layout>
-	<Hero h1="Like the greatest blog ever" content="Web Developer" class="max-w-6xl">
+	<Hero h1="The Greatest Blog Ever" content="Web Developer">
 		<div slot="image-section">
-			<img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+			<img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup">
 		</div>
 	</Hero>
-	<div class=" max-w-6xl mx-auto">
-		
-	</div>
+	<div class="mx-auto max-w-[1280px] p-5" hx-on:click="selectTag(event)">
+		<div class="mb-5" id="tag_container">
+			<button data-tag="latest"  
+				name="Latest Post Tag" 
+				class="tag active transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
+				Latest
+			</button>
+			{tags.map( tag => {
+				return <button 
+							data-tag={tag} 
+							title={`Tag ${tag}`} 
+							class="tag transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
+								{tag}
+					  </button>
+			})}
+		</div>
+		<div class="grid xl:grid-cols-2 gap-6" id="post_container">
+			{posts.map( p =>{
+				return <BlogPostPreview post={p} />
+			})}
+		</div>
+</div>
+
+<script is:inline>
+
+window.selectTag = (event) => {
+const target = event.target;
+const tag = target.dataset.tag;
+[...post_container.children].forEach( (_) => {
+    const v = _;
+    if(tag === "latest"){
+        v.style.display = "block";
+    }else{
+        if( v.dataset.tags && v.dataset.tags.split(",").includes(tag)){
+            v.style.display = "block";
+        }else{
+            v.style.display = "none";
+        }
+    }
+
+    [...v.querySelectorAll(".tag")].forEach( _ => {
+        const aTag = _;
+        if(aTag.dataset.tag && aTag.dataset.tag === tag){
+            aTag.classList.add("active");
+        }else{
+            aTag.classList.remove("active");
+        }
+    })
+});
+[...tag_container.children].forEach( (_) => {
+    const v = _;
+    if(v === target){
+        v.classList.add("active");
+    }else{
+        v.classList.remove("active");
+    }
+})
+}
+</script>
+<style is:global>
+	.tag{
+		&.active{
+			background-color: #000;
+			color: #fff;
+		}
+	}
+</style>
 </Layout>	

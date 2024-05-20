@@ -36,27 +36,35 @@
       main {
           view-transition-name: slide-it;
       }
-      header{
-        height: var(--nav-height);
-        overflow: hidden;
-        box-sizing: border-box;
-        background-color: white;
-        nav{
-           
-          a{
-            background-position: 0 calc(2 * var(--nav-height));
-            background-repeat: no-repeat;
-            background-size: 100% calc(var(--nav-height) * 3);
-            background-image: linear-gradient(180deg, rgb(35,56,118), rgb(35,56,118));
-            @apply transition-all p-6 ;
-            &.active{
-              @apply text-white ;
-              background-position: 0;
-            }
-            
-          }
-        }
-      }
-      
+
+
+/* scrollbar */
+body {
+  --sb-track-color: #232E33;
+  --sb-thumb-color: #004e7d;
+  --sb-size: 9px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 16px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 16px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+      scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+/* Scrollbar */
 
 }

@@ -1,0 +1,39 @@
+<!-- Slider main container -->
+<div class="carousel-component">
+    <div class="swiper-button-next">
+       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28" fill="none">
+         <path d="M2 14H30M30 14L18 26M30 14L18 2" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+     </div>
+   <div class="swiper site-slide">
+     <!-- Additional required wrapper -->
+     <div class="swiper-wrapper">
+       <!-- Slides -->
+      <slot></slot>
+     </div>
+     <!-- If we need pagination -->
+     <!--   <div class="swiper-pagination"></div> -->
+ 
+     <!-- If we need navigation buttons -->
+  
+ 
+     <!-- If we need scrollbar -->
+     <!--   <div class="swiper-scrollbar"></div> -->
+   </div>
+ </div>
+
+<script>
+    import Swiper from 'swiper';
+
+import { Navigation, Pagination,EffectFlip } from 'swiper/modules';
+// import Swiper and modules styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 1,
+      // If we need pagination
+  });
+
+</script>

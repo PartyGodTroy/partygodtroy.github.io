@@ -1,20 +1,40 @@
 ---
-import site from "@/site"
 ---
 
-<header  class="antialiased fixed top-0 w-screen z-10 border-b-2 border-blue-500" hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML transition:true">
-    <nav class="bg-white border-gray-200 dark:bg-gray-800" >
-       <ul class="flex">
+<header class="flex items-center">
+    <div class="ml-2 mr-5 font-bold uppercase site-name">
+        Ventroy Rolle
+    </div>
+    <nav  hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML transition:true" >
+       <ul>
         <li>
-            <a href="/about#" class="text-gray-900 dark:text-gray-100">About</a>
+            <a href="/#">
+               <span>
+                   About
+                </span> 
+            </a>
         </li>
         <li>
-            <a href="/blog#" class="text-gray-900 dark:text-gray-100">Code Blog</a>
-        </li>
-        <li>
-            <a href="/contact#" class="text-gray-900 dark:text-gray-100">Contact</a>
+            <a href="/blog#" >
+               <span>
+                   Code Blog
+                </span> 
+            </a>
         </li>
        </ul>
+    </nav>
+    <nav class="ml-auto">
+        <ul>
+            <li>
+                <a href="" target="_blank">Github</a>
+            </li>
+            <li>
+                <a href="" target="_blank">LinkedIn</a>
+            </li>
+            <li>
+                <a href="" target="_blank">Codepen</a>
+            </li>
+        </ul>
     </nav>
   </header>
 <script>
@@ -26,10 +46,77 @@ import site from "@/site"
             const href = item.getAttribute('href')
             const iscurrent = window.location.pathname === href
             if (iscurrent) return;
-            nav.querySelector('.active')?.classList.remove('active');
+            if (!item.parentElement?.classList.contains("contact")){
+                nav.querySelector('.active')?.classList.remove('active');
+            }
             requestAnimationFrame(() => {
                 item.classList.add('active')    
             });
         }
     });
+    console.log({path:window.location.pathname})
+    navItems.find(item => window.location.pathname === item.getAttribute('href')?.replace("#",""))?.click();
 </script>
+<style is:global>
+     :root{
+      --nav-height: 60px;
+    }
+    .site-name{
+        background-image:  radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+        background-size: 200%;
+            -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+            border: 0px solid white;
+            padding: 0px;
+       animation: bg-pan-right 8s infinite ease-in-out alternate;        
+    }
+    header {
+        height: var(--nav-height);
+        @apply  bg-white box-border overflow-hidden fixed top-0 w-screen z-10 border-b-2 border-orange-500;
+    }
+
+    nav {
+        @apply bg-white border-gray-200 dark:bg-gray-800;
+    }
+
+    ul {
+        @apply flex;
+        li {
+            @apply h-[var(--nav-height)] text-gray-900 transition-all;
+            background-image: linear-gradient(180deg, rgb(35, 56, 118), rgb(35, 56, 118));
+background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+
+            &.contact {
+                background-image: linear-gradient(180deg, cornflowerblue, cornflowerblue);
+            }
+            --bg-p-y: calc(2 * var(--nav-height));
+            --bg-s-y: calc(var(--nav-height) * 100);
+            background-position: 0 var(--bg-p-y);
+            background-size: var(--bg-s-y);
+            background-repeat: no-repeat;
+            &:has(.active){
+                background-position: 0 0;
+                @apply text-white font-bold;
+                animation: bg-nav-pan-right 12s infinite ease-in-out alternate;
+                background-repeat: repeat;
+            }
+            a {
+                @apply h-full px-4 transition-[all_0.2s] flex items-center justify-center;
+            }
+
+            &.active {
+                @apply text-white;
+            }
+        }
+    }
+
+    @keyframes bg-nav-pan-right {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 120% 0%;
+    }
+    
+}
+</style>

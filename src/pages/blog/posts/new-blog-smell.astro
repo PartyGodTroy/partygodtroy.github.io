@@ -1,0 +1,27 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import type { Post } from "@/site"
+
+
+export const post:Post = {
+    title: 'Welcome to the Astro blog',
+    description: 'I wanted A new blog in Astro, so I made one. This is the first post. lets see how it goes.',
+    tags: ['astro', 'demo'],
+    slug: 'new-blog-smell',
+    date: Date.parse('2021-09-01'),
+    featured_img: {
+        url: "/blog/new-blog-smell/cover.jpg",
+        alt: "A random image from picsum",
+        width: 300,
+        height: 200
+    },
+}
+
+---
+
+<BlogLayout post={post}>
+    <p>
+        This is the stack
+    </p>
+</BlogLayout>

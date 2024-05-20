@@ -1,0 +1,11 @@
+<div class="swiper-slide">
+    <div class="slide-content">
+      <div class="slide-image" style={`--bg:url(${Astro.props.img_url});`}></div>
+      <div class="slide-copy">
+        <slot></slot>
+        <div class="title">
+          {Astro.props.title}
+        </div>
+      </div>
+    </div>
+  </div>

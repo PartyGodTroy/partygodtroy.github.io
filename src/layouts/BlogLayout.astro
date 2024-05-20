@@ -4,9 +4,13 @@ import Layout from "./Layout.astro";
 ---
 
 <Layout>
-    <Hero h1="Ventroy Rolle" content="Web Developer">
+    <a class="block p-1 text-md text-white absolute font-bold transition-all group z-10" hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML transition:true" href="/blog" >
+		<span class="text-4xl group-hover:animate-bounce">👈🏿</span>	
+		<span>Back to Blog</span>
+	</a>
+    <Hero h1={Astro.props.post.title} content={Astro.props.post.description}>
 		<div slot="image-section">
-			<img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
+			<img src={Astro.props.post.featured_img.url} alt={Astro.props.post.featured_img.alt} width={Astro.props.post.featured_img.width} height={Astro.props.post.featured_img.height}  >
 		</div>
 	</Hero>
     <slot></slot>

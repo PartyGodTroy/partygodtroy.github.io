@@ -1,0 +1,91 @@
+---
+import type { Post } from "@/site";
+
+
+const post: Post = Astro.props.post ?? {
+    title: "Post Title",
+    date: Date.now(),
+    slug: "post-title",
+    tags: ["no tag"],
+    description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla",
+    featured_img: {
+        url: "https://picsum.photos/400/400",
+        width: 400,
+        height: 400,
+        alt: "Post Image",
+    },
+};
+
+const date = new Date(post.date);
+const month = date.toLocaleString('default', { month: 'long' });
+const day = date.getUTCDate();
+const year = date.getUTCFullYear();
+
+
+---
+
+<style>
+
+@property --bg-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 80px;
+}
+    .post-preview{
+        --bg-size: 0px;
+        background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+        background-size:var(--bg-size);
+        background-repeat: no-repeat;
+        transition: all 0.3s ease-in-out;
+        transition-behavior: smooth;
+        &:hover{
+            --bg-size:max(100vw, 500px);
+            background-repeat: repeat;
+            animation: bg-pan-right 20s linear infinite;
+
+        }
+    }
+@keyframes bg-pan-right {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: max(200vw, 500px) 0%;
+    }
+    
+}
+</style>
+
+<div data-type="blog-post-preview" data-tags={post.tags} class="border border-gray-200 rounded-lg p-4 post-preview group">
+    <div class="bg-[rgba(255,255,255,0.9)] rounded-xl p-2">
+        <div class="grid xl:grid-cols-10 gap-5">
+            <div class=" xl:col-span-4">
+                <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" rounded-lg max-h-72 w-full h-full justify-self-center" alt={post.featured_img.alt}>
+            </div>
+            <div  class=" xl:col-span-6">
+                <div>
+                    <div class="flex items-center">
+                        <h2 class="bold text-2xl">{post.title}</h2>
+                        <div hx-on:click="selectTag(event)">
+                            {post.tags.map((tag) => (
+                                <button  data-tag={tag} class="tag bg-gray-200 text-gray-800 rounded-full px-2 ml-2">{tag}</button>
+                            ))}
+                        </div>
+                    </div>
+                    <div>{month}/{day}/{year}</div>
+                    <p>
+                        {post.description}
+                    </p>
+                    <a
+                        class="text-blue-500 block hover:underline cursor-pointer rounded-lg px-2 py-1 mt-2 hover:(bg-blue-500 text-white)"
+                        hx-boost="true"
+                        hx-target="main"
+                        hx-select="main"
+                        hx-swap="outerHTML transition:true"
+                        href={`/blog/posts/${post.slug}`}>Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
