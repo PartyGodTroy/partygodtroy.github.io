@@ -60,7 +60,7 @@ const year = date.getUTCFullYear();
     <div class="bg-[rgba(255,255,255,0.9)] rounded-xl p-2">
         <div class="grid xl:grid-cols-10 gap-5">
             <div class=" xl:col-span-4">
-                <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" rounded-lg max-h-72 w-full h-full justify-self-center" alt={post.featured_img.alt}>
+                <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" object-cover rounded-lg w-full h-full justify-self-center max-h-52" alt={post.featured_img.alt}>
             </div>
             <div  class=" xl:col-span-6">
                 <div>

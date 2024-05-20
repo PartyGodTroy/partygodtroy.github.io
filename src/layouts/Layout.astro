@@ -11,9 +11,8 @@ import Footer from './Footer.astro'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{Astro.props.title}</title>
 	</head>
 	<body class="max-w-[1920px] mx-auto">
 		<Header slot="header">

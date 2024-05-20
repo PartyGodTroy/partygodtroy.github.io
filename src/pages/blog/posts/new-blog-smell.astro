@@ -21,7 +21,29 @@ export const post:Post = {
 ---
 
 <BlogLayout post={post}>
-    <p>
-        This is the stack
-    </p>
+    <div class="max-w-screen-lg mx-auto pt-10">
+        <section>
+
+            <h2>Welcome to my new blog!</h2>
+            <p>
+                This is the stack
+            </p>
+        </section>
+<section>
+    <h2>Motivations</h2>
+    <p></p>
+</section>
+    </div>
 </BlogLayout>
+
+<style>
+    h2 {
+        @apply text-3xl font-bold;
+    }
+    p{
+        @apply text-lg;
+    }
+    section{
+        @apply my-3;
+    }
+</style>
