@@ -1,15 +1,17 @@
 ---
+import CodeEditor from "@/components/CodeEditor.astro"
 import BlogLayout from "@/layouts/BlogLayout.astro"
 import Layout from "@/layouts/Layout.astro"
 import type { Post } from "@/site"
 
 
 export const post:Post = {
-    title: 'Welcome to the Astro blog',
+    title: 'Building a Blog with Astro',
     description: 'I wanted A new blog in Astro, so I made one. This is the first post. lets see how it goes.',
     tags: ['astro', 'demo'],
     slug: 'new-blog-smell',
     date: Date.parse('2021-09-01'),
+    boosted: true,
     featured_img: {
         url: "/blog/new-blog-smell/cover.jpg",
         alt: "A random image from picsum",
@@ -20,30 +22,59 @@ export const post:Post = {
 
 ---
 
-<BlogLayout post={post}>
-    <div class="max-w-screen-lg mx-auto pt-10">
-        <section>
+<script>
+    import "htmx.org"
+    </script>
 
-            <h2>Welcome to my new blog!</h2>
-            <p>
-                This is the stack
-            </p>
+<BlogLayout post={post}>
+    <div class=" pt-10">
+        <section class="max-w-screen-lg mx-auto grid gap-5 p-5">
+            <h2>Starting a Blog with Astro: A Journey into Web, CMS, and Game Development</h2>
+            <h3>Introduction</h3>
+            <p>Welcome to my blog! If you’re passionate about Web Development, CMS Development, and Game Development, you’ve come to the right place. This blog is a platform where I’ll share my experiences, learnings, and insights in these areas. Whether you’re a seasoned developer or just starting out, I hope you’ll find something valuable here.</p>
+            
+            <h3>The Stack</h3>
+            <p>Our journey will be powered by an exciting tech stack that includes Astro.js, Babylon.js, HTMX, and Tailwind CSS. Let’s take a brief look at each of these:</p>
+            
+            <ul class="ml-10 text-lg py-5 grid gap-5 xl:grid-cols-4 lg:grid-cols-2">
+                <li><b>Astro.js</b>: A front-end framework for building modern websites with less client-side JavaScript.</li>
+                <li><b>Babylon.js</b>: A powerful, open-source 3D rendering engine for creating stunning games in the browser.</li>
+                <li><b>HTMX</b>: A library that allows you to access AJAX, CSS Transitions, WebSockets, and Server Sent Events directly in HTML.</li>
+                <li><b>Tailwind CSS</b>: A utility-first CSS framework for designing responsive layouts with ease.</li>
+            </ul>
+
+            <h4>What’s Next?</h4>
+            <p>In the coming posts, we’ll dive deeper into each of these technologies. We’ll explore how they work, how to use them effectively, and how they can be combined to create amazing projects. From building interactive web pages with Astro.js and Tailwind CSS, to creating dynamic content management systems, to developing immersive games with Babylon.js, there’s a lot to look forward to.
+            
+            So, stay tuned and join me on this exciting journey of discovery and learning!
+            
+            I hope this draft meets your expectations. Feel free to modify it as per your needs. Happy blogging! 😊
+        </p>    
         </section>
-<section>
-    <h2>Motivations</h2>
-    <p></p>
-</section>
     </div>
 </BlogLayout>
 
 <style>
     h2 {
-        @apply text-3xl font-bold;
+        @apply text-4xl font-bold py-2;
+        @apply text-purple-900;
+        
+    }
+    h3 {
+        @apply text-3xl font-bold py-2;
+        @apply text-orange-500;
+        
+    }
+    h4 {
+        @apply text-2xl font-bold py-2;
     }
     p{
-        @apply text-lg;
+        @apply text-xl;
     }
     section{
-        @apply my-3;
+        @apply mt-3;
+    }
+    b{
+        @apply text-orange-500;
     }
 </style>

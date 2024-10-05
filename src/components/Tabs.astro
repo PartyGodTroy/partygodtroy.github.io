@@ -1,0 +1,42 @@
+---
+---
+
+
+
+<section id={`tabs-${Astro.props.id}`} role="tabpanel">
+    <nav id="tabs" role="tablist">
+        
+    </nav>
+    <div id=`tabs-${Astro.props.id}-container`>
+        <slot name="tabs"></slot>
+    </div>
+</section>
+
+<script define:vars={{
+    tabId:'tabs-' + Astro.props.id,
+    tabContainerId:`tabs-${Astro.props.id}-container`
+}}>
+    const tabs = document.getElementById(tabsId);
+    const tabContainer = tabs.getElementById(tabContainerId);
+    const tabButtons = document.querySelectorAll('tab-button');
+    const tabPanels = document.querySelectorAll('tab-panel');
+
+    tabButtons.forEach((button, index) => {
+        const tabId = `tab-${index}`;
+        button.setAttribute('id', tabId);
+        button.setAttribute('aria-controls', tabId);
+        button.setAttribute('role', 'tab');
+        button.setAttribute('aria-selected', 'false');
+        button.setAttribute('tabindex', '-1');
+        button.setAttribute('aria-controls', tabId);
+        button.setAttribute('aria-labelledby', tabId);
+        button.setAttribute('aria-hidden', 'true');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-disabled', 'false');
+        button.setAttribute('aria-posinset', index + 1);
+        button.setAttribute('aria-setsize', tabButtons.length);
+        button.setAttribute('aria-owns', tabId);
+        button.setAttribute('aria-label', `Tab ${index + 1}`);
+        button.setAttribute('aria-describedby', tabId);
+    });
+</script>

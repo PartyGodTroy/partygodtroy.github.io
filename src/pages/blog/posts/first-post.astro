@@ -4,12 +4,14 @@ import Layout from "@/layouts/Layout.astro"
 import type { Post } from "@/site"
 
 
+
 export const post:Post = {
     title: 'Hello World',
     description: 'gravida at, tempus sit amet, tempus id, eros. Vestibulum quis leo risus. Sed ut sapien. Nam tempus. Suspendisse sit amet ligula',
     tags: ['example', 'component'],
     slug: 'first-post',
-    date: Date.now(),
+    date:Date.parse('2021-09-01'),
+    boosted: true,
     featured_img: {
         url: "https://picsum.photos/300/200",
         alt: "A random image from picsum",

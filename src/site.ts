@@ -5,4 +5,6 @@ export interface Post{
     slug: string;
     featured_img:{ url: string; alt: string; width?: number; height?: number;}
     date: number;
+    // for htmx
+    boosted: boolean;
 }

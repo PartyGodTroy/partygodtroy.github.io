@@ -3,6 +3,8 @@
   @layer base {
     :root{
       --nav-height: 40px;
+      --font-size: 28px;
+      --rad-grad-1:radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
     }
 
 
@@ -31,11 +33,22 @@
         animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
         600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
       }
+      ::view-transition-old(fade-in) {
+        animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+      }
+      ::view-transition-new(fade-in) {
+        animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in;
+      }
    
       /* tie the view transition to a given CSS class */
       main {
           view-transition-name: slide-it;
       }
+      .hero{
+        view-transition-name: fade-in;
+      }
+
+
 
 
 /* scrollbar */
@@ -43,28 +56,41 @@ body {
   --sb-track-color: #232E33;
   --sb-thumb-color: #004e7d;
   --sb-size: 9px;
+    @apply max-w-[1920px] mx-auto;
+    &::-webkit-scrollbar {
+      width: var(--sb-size);
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 16px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--sb-thumb-color);
+      border-radius: 16px;
+    }
+    @supports not selector(::-webkit-scrollbar) {
+          scrollbar-color: var(--sb-thumb-color)
+                         var(--sb-track-color);
+    } 
 }
 
-body::-webkit-scrollbar {
-  width: var(--sb-size);
-}
+/* Scrollbar */
 
-body::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: 16px;
+:not(:defined) {
+  opacity: 0;
+  
 }
-
-body::-webkit-scrollbar-thumb {
-  background: var(--sb-thumb-color);
-  border-radius: 16px;
-}
-
-@supports not selector(::-webkit-scrollbar) {
-  body {
-      scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+:defined{
+  opacity: 1;
+  transition: opacity 0.3s 0.2s;
+  @starting-style {
   }
 }
-/* Scrollbar */
+:define{
+  @st
+}
+*{
+  transition-behavior: allow-discrete;
+}
 
 }

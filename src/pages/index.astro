@@ -1,57 +1,88 @@
 ---
-import Hero from "../components/Hero.astro";
-import Bio from "../components/Bio.astro";
-import Layout from "../layouts/Layout.astro";
-import Sidebar from "@/layouts/Header.astro";
-import Slider from "@/components/Slider.astro";
-import Slide from "@/components/Slide.astro";
-import BioSpot from "@/components/BioSpot.astro";
+import Hero from "@/components/Hero.astro";
+import Bio from "@/components/Bio.astro";
+import Layout from "@/layouts/Layout.astro";
+import BlogPostPreview from "@/components/BlogPostPreview.astro";
+import type { Post } from "@/site";
 
-
+export const posts = (await Astro.glob("./blog/posts/*.astro")).map((v) => (v as any).post as Post).sort((a, b) => (a.date > b.date ? -1 : 1));
+export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexOf(v) === i).sort()
 
 ---
-<style is:global>
-	.hero:has(.cover){
-		position:relative;
-		&:after{
-			content: "";
-			position:absolute;
-			top:0;
-			left:0;
-			width:100%;
-			height:100%;
-			background-image:url(/titleshot.jpg); 
-			background-position:  center -200px;
-			background-size: auto 100vw; 
-			object-fit:contain;
-			opacity:0.2;
-			@media (max-width: 768px){
-				background-position: top;; 
-				
-			}
 
+<Layout>
+	<Hero h1="The Greatest Blog Ever" content="Web Developer">
+		<div slot="image-section">
+			<img src="/blog/cover.webp" width="400" alt="mockup">
+		</div>
+	</Hero>
+	<div class="mx-auto max-w-[1280px] p-5" hx-on:click="selectTag(event)">
+		<div class="mb-5" id="tag_container">
+			<button data-tag="latest"  
+				name="Latest Post Tag" 
+				class="tag active transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
+				Latest
+			</button>
+			{tags.map( tag => {
+				return <button 
+							data-tag={tag} 
+							title={`Tag ${tag}`} 
+							class="tag transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
+								{tag}
+					  </button>
+			})}
+		</div>
+		<div class="grid xl:grid-cols-2 gap-6" id="post_container">
+			{posts.map( p =>{
+				return <BlogPostPreview post={p} />
+			})}
+		</div>
+</div>
+<script>
+    import "htmx.org";
+</script>
+<script is:inline>
+
+window.selectTag = (event) => {
+const target = event.target;
+const tag = target.dataset.tag;
+[...post_container.children].forEach( (_) => {
+    const v = _;
+    if(tag === "latest"){
+        v.style.display = "block";
+    }else{
+        if( v.dataset.tags && v.dataset.tags.split(",").includes(tag)){
+            v.style.display = "block";
+        }else{
+            v.style.display = "none";
+        }
+    }
+
+    [...v.querySelectorAll(".tag")].forEach( _ => {
+        const aTag = _;
+        if(aTag.dataset.tag && aTag.dataset.tag === tag){
+            aTag.classList.add("active");
+        }else{
+            aTag.classList.remove("active");
+        }
+    })
+});
+[...tag_container.children].forEach( (_) => {
+    const v = _;
+    if(v === target){
+        v.classList.add("active");
+    }else{
+        v.classList.remove("active");
+    }
+})
+}
+</script>
+<style is:global>
+	.tag{
+		&.active{
+			background-color: #000;
+			color: #fff;
 		}
 	}
 </style>
-<Layout title="Ventroy's Blog">
-	<Hero h1="Ventroy Rolle" content="Web Developer" class="cover">
-		<div slot="image-section">
-			<!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
-		</div>
-	</Hero>
-
-	<Bio>
-		<BioSpot title=".Net" color="dodgerblue" percent={60}></BioSpot>
-		<BioSpot title="Node" color="red" percent={60}></BioSpot>
-		<BioSpot title="Python" color="cornflowerblue" percent={60}></BioSpot>
-		<BioSpot title="PHP" color="red" percent={60}></BioSpot>
-		<BioSpot title="SQL" color="red" percent={60}></BioSpot>
-
-	</Bio>
-
-	<Slider>
-		<Slide title="Front End" img_url="https://picsum.photos/400/500"></Slide>
-		<Slide title="Back End" img_url="https://picsum.photos/400/500"></Slide>
-		<Slide title="Platforms / Tools" img_url="https://picsum.photos/400/500"></Slide>
-	</Slider>
 </Layout>	

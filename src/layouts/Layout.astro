@@ -7,11 +7,24 @@ import Footer from './Footer.astro'
 
 <html lang="en" class="bg-gray-200">
 	<head>
+		<script>
+			import "htmx.org"
+			import $ from 'cash-dom'
+			(window as any).$ = $;
+			(window as any).$t = {
+				si: setInterval,
+				st: setTimeout,
+			};
+        </script>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+        <script defer src="https://cdn.babylonjs.com/babylon.js"></script>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace-autoloader.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/dark.css" />
+
 		<meta name="generator" content={Astro.generator} />
+		
 		<title>{Astro.props.title}</title>
 	</head>
 	<body class="max-w-[1920px] mx-auto">
@@ -24,5 +37,6 @@ import Footer from './Footer.astro'
 		<Footer slot="footer">
 			
 		</Footer>
+		<slot name="modals"></slot>
 	</body>
 </html>

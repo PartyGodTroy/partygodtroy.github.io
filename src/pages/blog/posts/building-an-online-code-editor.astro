@@ -1,0 +1,86 @@
+---
+import CodeEditor from "@/components/CodeEditor.astro"
+import BlogLayout from "@/layouts/BlogLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import type { Post } from "@/site"
+
+
+export const post:Post = {
+    title: 'Building a Light weight code editor',
+    description: 'A simple code editor that can be used in any web project.',
+    tags: ['astro', 'demo', 'web components'],
+    slug: 'building-an-online-code-editor',
+    date: Date.parse('2021-09-01'),
+    boosted: false,
+    featured_img: {
+        url: "/blog/building-an-online-code-editor/cover.jpg",
+        alt: "A random image from picsum",
+        width: 300,
+        height: 200
+    },
+}
+
+---
+
+<script>
+    import "htmx.org"
+    </script>
+
+<BlogLayout post={post}>
+    <div class=" pt-10">
+        <section class="max-w-screen-lg mx-auto grid gap-5 p-5">
+        </section>
+
+
+<section class="mx-auto max-w-[800px]">
+    <h2>Components</h2>
+    <div>
+        <CodeEditor id="first_example" class="w-full h-96" readOnly="false">
+            <div slot="resources">
+            </div>
+            <canvas id="renderCanvas" class="w-full h-height" slot="output"></canvas>
+<!-- code -->
+<code is:raw>
+    // wow this should work
+    const canvas = document.getElementById("renderCanvas");
+    const engine = new BABYLON.Engine(canvas, true);
+    const scene = new BABYLON.Scene(engine);
+    const camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), scene);
+    const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
+    const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
+    engine.runRenderLoop(() => scene.render());
+    window.addEventListener("resize", () => engine.resize());
+</code>
+
+
+<!-- /code -->
+        </CodeEditor> 
+    </div>    
+</section>
+</div>
+</BlogLayout>
+
+<style>
+    h2 {
+        @apply text-4xl font-bold py-2;
+        @apply text-purple-900;
+        
+    }
+    h3 {
+        @apply text-3xl font-bold py-2;
+        @apply text-orange-500;
+        
+    }
+    h4 {
+        @apply text-2xl font-bold py-2;
+    }
+    p{
+        @apply text-xl;
+    }
+    section{
+        @apply mt-3;
+    }
+    b{
+        @apply text-orange-500;
+    }
+</style>

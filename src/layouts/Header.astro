@@ -1,26 +1,56 @@
 ---
+
+    const links = [
+      
+        {
+            name: 'Code Blog',
+            path: '/',
+            href: '/#'
+        },
+        {
+            name: 'About',
+            path: '/about',
+            href: '/about#'
+        },
+    ]
+
 ---
 
-<header class="flex items-center">
-    <div class="ml-2 mr-5 font-bold uppercase site-name">
-        Ventroy Rolle
-    </div>
-    <nav  hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML transition:true" >
-       <ul>
-        <li>
-            <a href="/#">
-               <span>
-                   About
-                </span> 
-            </a>
-        </li>
-        <li>
-            <a href="/blog#" >
-               <span>
-                   Code Blog
-                </span> 
-            </a>
-        </li>
+<script>
+import "htmx.org";
+        </script>
+        <header class="flex items-center">
+            <div class="ml-2 mr-5 font-bold uppercase site-name">
+                Ventroy Rolle
+            </div>
+
+            <nav id="main-nav"  
+                hx-boost="true" 
+                hx-target="main" 
+                hx-select="main" 
+                hx-swap="outerHTML transition:true" 
+                hx-on-htmx-before-request={`
+                setInterval(() => {
+                    $(this).find('a').each((i, el) =>{
+                        $(el).toggleClass('active', $(el).attr('data-path') === window.location.pathname)
+                    })
+                }, 100)
+                 
+                 `}>
+               <ul >
+        {links.map(link => {
+            return (
+                <li >
+                    <a href={link.href} data-path={link.path}>    
+                        <span>
+                            {link.name}
+                        </span>
+                    </a>
+                
+                </li>
+            )
+        })}
+  
        </ul>
     </nav>
     <nav class="ml-auto">
@@ -49,32 +79,13 @@
         </ul>
     </nav>
   </header>
-<script>
-    const nav = document.querySelector('nav') as HTMLElement
-    const navItems = [...nav.querySelectorAll('a')] as HTMLAnchorElement[]
-    navItems.forEach(item => {
-        item.onclick = (e) => {
-            e.preventDefault()
-            const href = item.getAttribute('href')
-            const iscurrent = window.location.pathname === href
-            if (iscurrent) return;
-            if (!item.parentElement?.classList.contains("contact")){
-                nav.querySelector('.active')?.classList.remove('active');
-            }
-            requestAnimationFrame(() => {
-                item.classList.add('active')    
-            });
-        }
-    });
-    console.log({path:window.location.pathname})
-    navItems.find(item => window.location.pathname === item.getAttribute('href')?.replace("#",""))?.click();
-</script>
+
 <style is:global>
      :root{
       --nav-height: 60px;
     }
     .site-name{
-        background-image:  radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+        background-image: var(--rad-grad-1);
         background-size: 200%;
             -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -96,7 +107,7 @@
         li {
             @apply h-[var(--nav-height)] text-gray-900 transition-all;
             background-image: linear-gradient(180deg, rgb(35, 56, 118), rgb(35, 56, 118));
-background: radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+            background: var(--rad-grad-1);
 
             &.contact {
                 background-image: linear-gradient(180deg, cornflowerblue, cornflowerblue);
