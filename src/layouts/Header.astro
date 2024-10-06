@@ -16,27 +16,21 @@
 
 ---
 
-<script>
-import "htmx.org";
+<script defer>
+    document.addEventListener('DOMContentLoaded', () =>{
+        document.querySelectorAll('nav a').forEach((el) =>{
+            el.classList.toggle('active', el.dataset.path === window.location.pathname)
+        })
+        
+    })
+
         </script>
         <header class="flex items-center">
             <div class="ml-2 mr-5 font-bold uppercase site-name">
                 Ventroy Rolle
             </div>
 
-            <nav id="main-nav"  
-                hx-boost="true" 
-                hx-target="main" 
-                hx-select="main" 
-                hx-swap="outerHTML transition:true" 
-                hx-on-htmx-before-request={`
-                setInterval(() => {
-                    $(this).find('a').each((i, el) =>{
-                        $(el).toggleClass('active', $(el).attr('data-path') === window.location.pathname)
-                    })
-                }, 100)
-                 
-                 `}>
+            <nav id="main-nav"  >
                <ul >
         {links.map(link => {
             return (
