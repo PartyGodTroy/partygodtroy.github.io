@@ -39,10 +39,10 @@
 
   /* tie the view transition to a given CSS class */
   main {
-    view-transition-name: slide-it;
+    /* view-transition-name: slide-it; */
   }
   .hero {
-    view-transition-name: fade-in;
+    /* view-transition-name: fade-in; */
   }
 
   /* scrollbar */

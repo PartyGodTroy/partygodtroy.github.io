@@ -6,52 +6,80 @@ import Sidebar from "@/layouts/Header.astro";
 import Slider from "@/components/Slider.astro";
 import Slide from "@/components/Slide.astro";
 import BioSpot from "@/components/BioSpot.astro";
-
-
-
+import PortfolioPiece from "@/components/PortfolioPiece.astro";
 ---
-<style is:global>
-	.hero:has(.cover){
-		position:relative;
-		&:after{
-			content: "";
-			position:absolute;
-			top:0;
-			left:0;
-			width:100%;
-			height:100%;
-			background-image:url(/titleshot.jpg); 
-			background-position:  center -200px;
-			background-size: auto 100vw; 
-			object-fit:contain;
-			opacity:0.2;
-			@media (max-width: 768px){
-				background-position: top;; 
-				
-			}
 
-		}
-	}
+<style is:global>
+  .hero:has(.cover) {
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center -200px;
+      background-size: auto 100vw;
+      object-fit: contain;
+      opacity: 0.2;
+      @media (max-width: 768px) {
+        background-position: top;
+      }
+    }
+  }
 </style>
 <Layout title="Ventroy's Blog">
-	<Hero h1="Ventroy Rolle" content="Web Developer" class="cover">
-		<div slot="image-section">
-			<!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
-		</div>
-	</Hero>
+  <Hero h1="Ventroy Rolle" content="Web Developer" class="cover">
+    <div slot="image-section">
+      <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
+    </div>
+  </Hero>
 
-	<Bio>
-		<BioSpot title=".Net" color="dodgerblue" percent={60}></BioSpot>
-		<BioSpot title="Node" color="red" percent={60}></BioSpot>
-		<BioSpot title="Python" color="cornflowerblue" percent={60}></BioSpot>
-		<BioSpot title="PHP" color="red" percent={60}></BioSpot>
-		<BioSpot title="SQL" color="red" percent={60}></BioSpot>
 
-	</Bio>
+  <section class="max-w-[1280px] mx-auto px-4 lg:px-0">
+    <div class="my-10">
+      <h2 class="text-4xl leading-9 font-bold">Portfolio</h2>
+	  <hr />
+    </div>
+    <div class="grid  xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4  gap-4">
+		<PortfolioPiece
+        title="Brunnerworks.com"
+        summary="Brunnerworks site built with Next.js, Vercel, and Builder.io"
+        url="https://brunnerworks.com"
+        image={{
+          src: "/brunner-sc.png",
+          alt: "brunner website",
+        }}
+      />
+      <PortfolioPiece
+        title="Brusters.com"
+        summary="Brusters marketing site built with React and Umbraco"
+        url="https://brusters.com"
+        image={{
+          src: "/brusters-sc.png",
+          alt: "brusters website",
+        }}
+      />
+	  <PortfolioPiece
+	  title="Green Building Alliance"
+	  summary="Brusters marketing site built with React and Umbraco"
+	  url="https://gba.org"
+	  image={{
+		src: "/gba-sc.png",
+		alt: "brusters website",
+	  }}
+	/>
+	<PortfolioPiece
+	title="Advect"
+	summary="Component for building and sharing webcomponents"
+	url="https://advect.org"
+	image={{
+	  src: "/advect-sc.png",
+	  alt: "advect webcomponent website",
+	}}
+  />
+    </div>
+  </section>
+</Layout>
 
-	<Slider>
-		<Slide title="Front End" img_url="https://picsum.photos/400/500"></Slide>
-		<Slide title="Back End" img_url="https://picsum.photos/400/500"></Slide>
-		<Slide title="Platforms / Tools" img_url="https://picsum.photos/400/500"></Slide>
-	</Slider>
-</Layout>	

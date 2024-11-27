@@ -1,0 +1,23 @@
+<article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
+<styLe>
+   
+</styLe>
+  <a href={Astro.props.url}
+  target="_blank">
+    <img
+      alt={Astro.props?.image?.alt ?? ""}
+      src={Astro.props?.image?.src ?? ""}
+      class="h-56 w-full object-cover object-top"
+    />
+  </a>
+
+<div class="bg-white p-4 sm:p-6">
+  <a href={Astro.props.url} title={Astro.props.title ?? ""} target="_blank">
+    <h3 class="mt-0.5 text-lg text-gray-900">{Astro.props.title ?? ""}</h3>
+  </a>
+
+  <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+    {Astro.props.summary ?? ""}
+  </p>
+</div>
+</article>

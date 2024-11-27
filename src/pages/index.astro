@@ -13,13 +13,17 @@ export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexO
 <Layout>
 	<Hero h1="The Greatest Blog Ever" content="Web Developer">
 		<div slot="image-section">
-			<img src="/blog/cover.webp" width="400" alt="mockup">
+			<img src="/blog/cover.webp" width="200" alt="mockup">
 		</div>
 	</Hero>
-	<div class="mx-auto max-w-[1280px] p-5" hx-on:click="selectTag(event)">
-		<div class="mb-5" id="tag_container">
+	<div class="mx-auto max-w-[1280px] p-5 " >
+		<div>
+			<h2 class="text-4xl mb-5 font-bold">Tags</h1>
+		</div>
+		<div class="mb-5 flex gap-3 flex-wrap " id="tag_container">
 			<button data-tag="latest"  
 				name="Latest Post Tag" 
+				onclick="selectTag(event)"
 				class="tag active transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
 				Latest
 			</button>
@@ -27,24 +31,24 @@ export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexO
 				return <button 
 							data-tag={tag} 
 							title={`Tag ${tag}`} 
-							class="tag transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2">
+							onclick="selectTag(event)"
+							class="tag transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2 whitespace-nowrap">
 								{tag}
 					  </button>
 			})}
 		</div>
-		<div class="grid xl:grid-cols-2 gap-6" id="post_container">
+		<div class="grid xl:grid-cols-2 gap-6 blog-listing-tl" id="post_container" >
 			{posts.map( p =>{
 				return <BlogPostPreview post={p} />
 			})}
 		</div>
 </div>
-<script>
-    import "htmx.org";
-</script>
 <script is:inline>
 
 window.selectTag = (event) => {
-const target = event.target;
+
+	document.startViewTransition(()=>{
+		const target = event.target;
 const tag = target.dataset.tag;
 [...post_container.children].forEach( (_) => {
     const v = _;
@@ -75,14 +79,49 @@ const tag = target.dataset.tag;
         v.classList.remove("active");
     }
 })
+	})
+
+
 }
 </script>
 <style is:global>
 	.tag{
+		padding: 0.2em 0.5em;
 		&.active{
 			background-color: #000;
 			color: #fff;
 		}
 	}
+	@keyframes move-out {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes move-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+.blog-listing-tl{
+  view-transition-name: blog-listing;
+  
+}
+::view-transition-old(blog-listing) {
+  animation: 0.4s ease-in both move-out;
+}
+
+::view-transition-new(blog-listing) {
+  animation: 0.4s ease-in both move-in;
+}
+
 </style>
 </Layout>	
