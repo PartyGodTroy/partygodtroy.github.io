@@ -45,6 +45,54 @@
     /* view-transition-name: fade-in; */
   }
 
+  a.link{
+    font-weight:bold;
+    transition:all 0.2s;
+    color:rgba(131, 58, 180, 1);
+    &:hover{
+    color:  rgba(253, 29, 29, 1);
+
+    }
+  }
+
+  ol{
+    list-style:number;
+    li {
+      margin-block: 20px;
+    }
+  }
+
+  pre {
+    border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    border: 1px solid #BCBEC0;
+    background: #F1F3F5;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
+}
+
+code {
+  color: black;
+    border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border: 1px solid #BCBEC0;
+    padding: 2px;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
+    > * {
+      display:block;
+    }
+}
+
+pre code {
+    border-radius: 0px; 
+    -moz-border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    border: 0px;
+    padding: 2px;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
+}
+
   /* scrollbar */
   body {
     --sb-track-color: #232e33;
@@ -79,7 +127,6 @@
     }
   }
   :define {
-    @st;
   }
   * {
     transition-behavior: allow-discrete;

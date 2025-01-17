@@ -7,7 +7,7 @@ import type { Post } from "@/site"
 
 export const post:Post = {
     title: 'Building a Light weight code editor',
-    description: 'A simple code editor that can be used in any web project.',
+    description: 'A simple code editor that can be used in any AstroJS project.',
     tags: ['astro', 'demo', 'web components'],
     slug: 'building-an-online-code-editor',
     date: Date.parse('2021-09-01'),
@@ -33,11 +33,17 @@ export const post:Post = {
 
 
 <section class="mx-auto max-w-[800px]">
-    <h2>Components</h2>
+    <h2>Integrating an inline JS editor into your AstroJS site</h2>
+    <div class="my-3">
+    Astro JS, the modern static site generator, continues to capture the interest of developers with its powerful capabilities and ease of use. One of the most requested features is the ability to include an inline code editor directly within your Astro JS projects. This post will walk you through the process of adding this to your project
+    </div>
+    
     <div>
         <CodeEditor id="first_example" class="w-full h-96" readOnly="false">
             <div slot="resources">
+                <!-- Resources like js and html goes here -->
             </div>
+            <!-- this is where the canvas goes, slotted to the output -->
             <canvas id="renderCanvas" class="w-full h-height" slot="output"></canvas>
 <!-- code -->
 <code is:raw>
@@ -56,6 +62,38 @@ export const post:Post = {
 <!-- /code -->
         </CodeEditor> 
     </div>    
+    <div class="my-3">
+        <h2>Installation</h2>
+        <ol>
+            <li>
+                <div>Grab the source of the component from the <a class="link" href="https://gist.github.com/PartyGodTroy/9e797933f4d5e6842460bf14c49980f1">GIST</a></div>
+            </li>
+            <li>
+                <p>
+                    Include the supporting Shoelace components (this can be in your layout or directly added to the <b>CodeEditor.astro</b> file)
+                </p>
+<pre>
+    <code is:raw>
+ &lt;script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace-autoloader.js"></script>
+ &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/dark.css" />
+    </code>
+</pre>
+            </li>
+        </ol>
+
+    </div>
+    <div class="my-3">
+        <h2>Usage based on the example above</h2>
+        <script is:raw src="https://gist.github.com/PartyGodTroy/0c6b88c15cde6d9a21a9caefd025488f.js"></script>
+    </div>
+</section>
+<section class="mx-auto max-w-[800px]">
+    <h2>Conclusion</h2>
+    <p>
+        Building an inline code editor for your Astro JS projects can greatly enhance the interactivity and usability of your web applications. By leveraging the power of CodeMirror and the flexibility of Astro JS, you can create a robust and efficient inline code editor tailored to your needs. Happy coding!
+        
+        Feel free to expand on this template by adding more advanced features, such as syntax highlighting for additional languages, theme customization, or integration with other Astro components. If you need any more help or details, just let me know!
+    </p>
 </section>
 </div>
 </BlogLayout>

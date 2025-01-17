@@ -5,7 +5,7 @@ import Layout from "@/layouts/Layout.astro";
 import BlogPostPreview from "@/components/BlogPostPreview.astro";
 import type { Post } from "@/site";
 
-export const posts = (await Astro.glob("./blog/posts/*.astro")).map((v) => (v as any).post as Post).sort((a, b) => (a.date > b.date ? -1 : 1));
+export const posts = (await Astro.glob("./blog/posts/*.astro")).map((v) => (v as any).post as Post).sort((a, b) => (a.date > b.date ? -1 : 1)).filter(p => p.hidden != true);
 export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexOf(v) === i).sort()
 
 ---

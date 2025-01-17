@@ -36,14 +36,13 @@ import PortfolioPiece from "@/components/PortfolioPiece.astro";
     </div>
   </Hero>
 
-
   <section class="max-w-[1280px] mx-auto px-4 lg:px-0">
     <div class="my-10">
-      <h2 class="text-4xl leading-9 font-bold">Portfolio</h2>
-	  <hr />
+      <h2 class="text-4xl leading-9 font-bold">Professional Work</h2>
+      <hr />
     </div>
-    <div class="grid  xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4  gap-4">
-		<PortfolioPiece
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
+      <PortfolioPiece
         title="Brunnerworks.com"
         summary="Brunnerworks site built with Next.js, Vercel, and Builder.io"
         url="https://brunnerworks.com"
@@ -61,25 +60,39 @@ import PortfolioPiece from "@/components/PortfolioPiece.astro";
           alt: "brusters website",
         }}
       />
-	  <PortfolioPiece
-	  title="Green Building Alliance"
-	  summary="Brusters marketing site built with React and Umbraco"
-	  url="https://gba.org"
-	  image={{
-		src: "/gba-sc.png",
-		alt: "brusters website",
-	  }}
-	/>
-	<PortfolioPiece
-	title="Advect"
-	summary="Component for building and sharing webcomponents"
-	url="https://advect.org"
-	image={{
-	  src: "/advect-sc.png",
-	  alt: "advect webcomponent website",
-	}}
-  />
+      <PortfolioPiece
+        title="Green Building Alliance"
+        summary="GBA site built with Vue and Umbraco"
+        url="https://gba.org"
+        image={{
+          src: "/gba-sc.png",
+          alt: "brusters website",
+        }}
+      />
+      <PortfolioPiece
+        title="Advect"
+        summary="Component for building and sharing webcomponents"
+        url="https://advect.org"
+        image={{
+          src: "/advect-sc.png",
+          alt: "advect webcomponent website",
+        }}
+      />
+    </div>
+    <div class="my-10">
+      <h2 class="text-4xl leading-9 font-bold">Code Pens</h2>
+      <hr />
+    </div>
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
+      <PortfolioPiece
+        title="Content Drawer"
+        summary="Component for building and sharing webcomponents"
+        url="https://codepen.io/PartyGodTroy/details/qBNoaOM"
+        image={{
+          src: "https://shots.codepen.io/username/pen/qBNoaOM-800.jpg?version=1604280742",
+          alt: "Code Pen",
+        }}
+      />
     </div>
   </section>
 </Layout>
-

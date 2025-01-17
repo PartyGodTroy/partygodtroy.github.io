@@ -7,4 +7,5 @@ export interface Post{
     date: number;
     // for htmx
     boosted: boolean;
+    hidden?:boolean
 }
