@@ -22,7 +22,6 @@ const month = date.toLocaleString('default', { month: 'long' });
 const day = date.getUTCDate();
 const year = date.getUTCFullYear();
 
-
 ---
 
 
@@ -34,20 +33,20 @@ const year = date.getUTCFullYear();
   inherits: true;
   initial-value: 80px;
 }
-    .post-preview{
-        --bg-size: 0px;
-        background: var(--rad-grad-1);
-        background-size:var(--bg-size);
-        background-repeat: no-repeat;
-        transition: all 0.3s ease-in-out;
-        transition-behavior: smooth;
-        &:hover{
-            --bg-size:max(100vw, 500px);
-            background-repeat: repeat;
-            animation: bg-pan-right 20s linear infinite;
+.post-preview{
+    --bg-size: 0px;
+    background: var(--rad-grad-1);
+    background-size:var(--bg-size);
+    background-repeat: no-repeat;
+    transition: all 0.3s ease-in-out;
+    transition-behavior: smooth;
+    &:hover{
+        --bg-size:max(100vw, 500px);
+        background-repeat: repeat;
+        animation: bg-pan-right 20s linear infinite;
 
-        }
     }
+}
 @keyframes bg-pan-right {
     0% {
         background-position: 0% 0%;
@@ -60,7 +59,7 @@ const year = date.getUTCFullYear();
 </style>
 
 <div data-type="blog-post-preview" data-tags={post.tags} class="border border-gray-200 rounded-lg p-4 post-preview group">
-    <div class="bg-[rgba(255,255,255,0.9)] rounded-xl p-2">
+    <div class="bg-[rgba(255,255,255,0.9)] rounded-xl h-full p-2">
         <div class="grid xl:grid-cols-10 gap-5">
             <a class=" xl:col-span-4" href={`/blog/posts/${post.slug}/#`} title={post.title}>
                 <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" object-cover rounded-lg w-full h-full justify-self-center max-h-52" alt={post.featured_img.alt}>
@@ -68,7 +67,7 @@ const year = date.getUTCFullYear();
             <div  class=" xl:col-span-6">
                 <div class="grid gap-2">
                     <div class="flex items-center">
-                        <h3 class="bold text-3xl font-semibold">{post.title}</h3>
+                        <a href={`/blog/posts/${post.slug}/#`} class="bold text-3xl font-semibold">{post.title}</a>
                         <div class="flex flex-wrap gap-2">
                             {post.tags.map((tag) => (
                                 <button  data-tag={tag} onclick="selectTag(event)" class="tag bg-gray-200 text-gray-800 rounded-full px-2 ml-2 whitespace-nowrap">{tag}</button>

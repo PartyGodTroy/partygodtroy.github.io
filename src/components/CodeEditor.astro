@@ -3,6 +3,8 @@
 ---
 <div class="code-editor sl-theme-dark" id="editor-wrapper">
     <slot name="resources">
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace-autoloader.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/dark.css" />
         <script defer type="module" src="https://cdn.jsdelivr.net/npm/monaco-editor@0.39.0/+esm"></script>
 		<link href="https://cdn.jsdelivr.net/npm/vscode-codicons@0.0.17/dist/codicon.min.css" rel="stylesheet">
     </slot>
@@ -36,7 +38,7 @@
         {
             elId:Astro.props.id,
             language:Astro.props.language ?? 'javascript', 
-            autoRun: Astro.props.autoRun ?? true, 
+            autoRun: Astro.props.autoRun  ?? true, 
             readOnly:Astro.props.readOnly ?? false,
             noOuput: Astro.props.noOutput ?? false
         }
