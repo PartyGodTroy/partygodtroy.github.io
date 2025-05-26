@@ -1,4 +1,4 @@
-@tailwind base;
+@import "tailwindcss";
 
 @layer base {
   :root {

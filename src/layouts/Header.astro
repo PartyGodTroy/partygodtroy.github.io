@@ -100,6 +100,7 @@ const links = [
 </header>
 
 <style is:global>
+  @reference "tailwindcss";
   :root {
     --nav-height: 60px;
   }
@@ -127,10 +128,10 @@ const links = [
       @apply h-[var(--nav-height)] text-gray-900 transition-all;
       background-image: linear-gradient(
         180deg,
-        rgb(35, 56, 118),
-        rgb(35, 56, 118)
+        white,
+        white
       );
-      background: var(--rad-grad-1);
+      background-image: var(--rad-grad-1);
 
       &.contact {
         background-image: linear-gradient(

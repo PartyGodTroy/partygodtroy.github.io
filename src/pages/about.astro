@@ -8,9 +8,11 @@ import Slide from "@/components/Slide.astro";
 import BioSpot from "@/components/BioSpot.astro";
 import PortfolioPiece from "@/components/PortfolioPiece.astro";
 import Skill from "@/components/Skill";
+import SkillSection from "@/components/SkillSection.astro";
 ---
 
 <style is:global>
+  @reference "tailwindcss";
   .hero:has(.cover) {
     position: relative;
     &:after {
@@ -36,32 +38,9 @@ import Skill from "@/components/Skill";
       <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
     </div>
   </Hero>
-<section class="max-w-[1280px] mx-auto px-4 lg:px-0">
-    <div class="my-10">
-      <h2 class="text-4xl leading-9 font-bold">Skill Summary</h2>
-      <hr />
-    </div>
-    <Skill name=".NET" points={10}  client:load />
-    <Skill name="Umbraco" points={10}  client:load />
-    <Skill name="ASP.NET" points={10}  client:load />
-    <!-- SQL -->
-    <Skill name="MySQL" points={10}  client:load />
-    <Skill name="MSSQL" points={10}  client:load />
-    <Skill name="Postgres" points={10}  client:load />
-  <!-- JAVASCRIPT -->
-    <Skill name="Javascript" points={10}  client:load />
-    <Skill name="React" points={10}  client:load />
-    <Skill name="Vue" points={10}  client:load />
-    <Skill name="NextJS" points={10}  client:load />
-    <Skill name="Astro" points={10}  client:load />
-
-
-
-</section>
   <section class="max-w-[1280px] mx-auto px-4 lg:px-0">
     <div class="my-10">
-      <h2 class="text-4xl leading-9 font-bold">Professional Work</h2>
-      <hr />
+      <h2 class="text-4xl leading-9 font-bold site-name">Professional Work</h2>
     </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
       <PortfolioPiece
@@ -91,6 +70,26 @@ import Skill from "@/components/Skill";
           alt: "brusters website",
         }}
       />
+          <PortfolioPiece
+        title="Wesbanco"
+        summary="Wordpress site for Wesbanco built with Elementor"
+        url="wesbanco.com"
+        image={{
+          src: "/wesbanco-sc.png",
+          alt: "Wesbanco website",
+        }}
+      />
+
+          <PortfolioPiece
+        title="Goodwill of North GA"
+        summary="Wordpress site for Goodwill of North GA built with ACF"
+        url="wesbanco.com"
+        image={{
+          src: "/goodwill-sc.png",
+          alt: "Goodwill of North GA",
+        }}
+      />
+
       <PortfolioPiece
         title="Advect"
         summary="Component for building and sharing webcomponents"
@@ -101,9 +100,10 @@ import Skill from "@/components/Skill";
         }}
       />
     </div>
-    <div class="my-10">
-      <h2 class="text-4xl leading-9 font-bold">Code Pens</h2>
       <hr />
+
+    <div class="my-10">
+      <h2 class="text-4xl leading-9 font-bold site-name">Code Pens</h2>
     </div>
     <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
       <PortfolioPiece
@@ -115,7 +115,7 @@ import Skill from "@/components/Skill";
           alt: "Code Pen",
         }}
       />
-        <PortfolioPiece
+      <PortfolioPiece
         title="Playing with new CSS transitions"
         summary="CSS transitions and animations"
         url="https://codepen.io/PartyGodTroy/full/RwqvjNK"
@@ -133,24 +133,32 @@ import Skill from "@/components/Skill";
           src: "https://shots.codepen.io/username/pen/XWREYqO-512.jpg?version=1722627630",
           alt: "Code Pen",
         }}
-        />
+      />
     </div>
     <div class="py-5 flex justify-center">
-     <a class="flex items-center gap-2 text-2xl" href="https://codepen.io/PartyGodTroy" target="_blank">
-      View All
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="30"
-                height="50"
-                viewBox="0 0 50 50"
-              >
-                <path
-                  d="M 25 4 L 4 17.34375 L 4 32.652344 L 25 46 L 46 32.65625 L 46 17.34375 Z M 25 29.183594 L 19.066406 25.070313 L 25 21.023438 L 30.933594 25.070313 Z M 27 17.605469 L 27 9.949219 L 40.429688 18.484375 L 34.410156 22.65625 Z M 23 17.605469 L 15.589844 22.65625 L 9.570313 18.484375 L 23 9.949219 Z M 12.09375 25.042969 L 8 27.832031 L 8 22.203125 Z M 15.570313 27.453125 L 23 32.605469 L 23 40.050781 L 9.589844 31.527344 Z M 27 32.605469 L 34.429688 27.453125 L 40.410156 31.527344 L 27 40.050781 Z M 37.90625 25.042969 L 42 22.203125 L 42 27.832031 Z"
-                ></path>
-              </svg>
-            </a>
-      </div>
+      <a
+        class="flex items-center gap-2 text-2xl font-bold"
+        href="https://codepen.io/PartyGodTroy"
+        target="_blank"
+      >
+        View All
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          width="30"
+          height="50"
+          viewBox="0 0 50 50"
+        >
+          <path
+            d="M 25 4 L 4 17.34375 L 4 32.652344 L 25 46 L 46 32.65625 L 46 17.34375 Z M 25 29.183594 L 19.066406 25.070313 L 25 21.023438 L 30.933594 25.070313 Z M 27 17.605469 L 27 9.949219 L 40.429688 18.484375 L 34.410156 22.65625 Z M 23 17.605469 L 15.589844 22.65625 L 9.570313 18.484375 L 23 9.949219 Z M 12.09375 25.042969 L 8 27.832031 L 8 22.203125 Z M 15.570313 27.453125 L 23 32.605469 L 23 40.050781 L 9.589844 31.527344 Z M 27 32.605469 L 34.429688 27.453125 L 40.410156 31.527344 L 27 40.050781 Z M 37.90625 25.042969 L 42 22.203125 L 42 27.832031 Z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+      <hr />
+
   </section>
+  <SkillSection client:load />
+
 </Layout>

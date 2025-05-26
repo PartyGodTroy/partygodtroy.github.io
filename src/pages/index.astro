@@ -32,7 +32,7 @@ export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexO
 							data-tag={tag} 
 							title={`Tag ${tag}`} 
 							onclick="selectTag(event)"
-							class="tag transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2 whitespace-nowrap">
+							class="tag cursor-pointer transition-all bg-gray-200 text-gray-800 px-2 py-1 rounded-lg mr-2 whitespace-nowrap">
 								{tag}
 					  </button>
 			})}
@@ -85,6 +85,7 @@ const tag = target.dataset.tag;
 }
 </script>
 <style is:global>
+	@reference "tailwindcss";
 	.tag{
 		padding: 0.2em 0.5em;
 		&.active{
