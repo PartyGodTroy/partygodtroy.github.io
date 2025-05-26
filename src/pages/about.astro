@@ -7,6 +7,7 @@ import Slider from "@/components/Slider.astro";
 import Slide from "@/components/Slide.astro";
 import BioSpot from "@/components/BioSpot.astro";
 import PortfolioPiece from "@/components/PortfolioPiece.astro";
+import Skill from "@/components/Skill";
 ---
 
 <style is:global>
@@ -35,7 +36,28 @@ import PortfolioPiece from "@/components/PortfolioPiece.astro";
       <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" width="200" alt="mockup"> -->
     </div>
   </Hero>
+<section class="max-w-[1280px] mx-auto px-4 lg:px-0">
+    <div class="my-10">
+      <h2 class="text-4xl leading-9 font-bold">Skill Summary</h2>
+      <hr />
+    </div>
+    <Skill name=".NET" points={10}  client:load />
+    <Skill name="Umbraco" points={10}  client:load />
+    <Skill name="ASP.NET" points={10}  client:load />
+    <!-- SQL -->
+    <Skill name="MySQL" points={10}  client:load />
+    <Skill name="MSSQL" points={10}  client:load />
+    <Skill name="Postgres" points={10}  client:load />
+  <!-- JAVASCRIPT -->
+    <Skill name="Javascript" points={10}  client:load />
+    <Skill name="React" points={10}  client:load />
+    <Skill name="Vue" points={10}  client:load />
+    <Skill name="NextJS" points={10}  client:load />
+    <Skill name="Astro" points={10}  client:load />
 
+
+
+</section>
   <section class="max-w-[1280px] mx-auto px-4 lg:px-0">
     <div class="my-10">
       <h2 class="text-4xl leading-9 font-bold">Professional Work</h2>
