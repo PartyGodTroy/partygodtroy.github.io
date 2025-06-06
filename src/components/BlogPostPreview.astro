@@ -1,5 +1,6 @@
 ---
 import type { Post } from "@/site";
+import { undefined } from "astro:schema";
 
 
 
@@ -8,6 +9,7 @@ const post: Post = Astro.props.post ?? {
     date: Date.now(),
     slug: "post-title",
     tags: ["no tag"],
+    external_link: null,
     description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla. Ut nec luctus mi. Nulla facilisi. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Sed nec magna nec augue scelerisque ultricies. Donec at libero nec nunc porta fringilla",
     featured_img: {
         url: "https://picsum.photos/400/400",
@@ -21,6 +23,10 @@ const date = new Date(post.date);
 const month = date.toLocaleString('default', { month: 'long' });
 const day = date.getUTCDate();
 const year = date.getUTCFullYear();
+
+
+const linkToPost = post.external_link ?? `/blog/posts/${post.slug}/#`
+
 
 ---
 
@@ -62,13 +68,22 @@ const year = date.getUTCFullYear();
 <div data-type="blog-post-preview" data-tags={post.tags} class="border border-gray-200 rounded-lg p-4 post-preview group">
     <div class="bg-[rgba(255,255,255,0.9)] rounded-xl h-full p-2">
         <div class="grid xl:grid-cols-10 gap-5">
-            <a class=" xl:col-span-4" href={`/blog/posts/${post.slug}/#`} title={post.title}>
-                <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" object-cover rounded-lg w-full h-full justify-self-center max-h-52" alt={post.featured_img.alt}>
-            </a>
+            {post.external_link
+                ?  <a class=" xl:col-span-4" href={linkToPost} title={post.title} target="_blank">
+                    <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" object-cover rounded-lg w-full h-full justify-self-center max-h-52" alt={post.featured_img.alt}>
+                    </a>
+                :  <a class=" xl:col-span-4" href={linkToPost} title={post.title}>
+                    <img  src={post.featured_img?.url ?? "https://picsum.photos/100/100"} class=" object-cover rounded-lg w-full h-full justify-self-center max-h-52" alt={post.featured_img.alt}>
+                   </a>
+            }
+           
             <div  class=" xl:col-span-6">
                 <div class="grid gap-2">
                     <div class="flex items-center">
-                        <a href={`/blog/posts/${post.slug}/#`} class="bold text-3xl font-semibold">{post.title}</a>
+                          {post.external_link 
+                            ? <a href={linkToPost} class="bold text-3xl font-semibold" target="_blank">{post.title}</a>
+                            :<a href={linkToPost} class="bold text-3xl font-semibold">{post.title}</a>
+                          }
                         <div class="flex flex-wrap gap-2">
                             {post.tags.map((tag) => (
                                 <button  data-tag={tag} onclick="selectTag(event)" class="tag bg-gray-200 text-gray-800 rounded-full px-2 ml-2 whitespace-nowrap">{tag}</button>
@@ -79,9 +94,10 @@ const year = date.getUTCFullYear();
                     <p class="text-lg">
                         {post.description}
                     </p>
-                    <a
-                        class="text-orange-500 text-lg font-bold block hover:underline cursor-pointer rounded-lg px-2 py-1 mt-2 hover:(bg-blue-500 text-white)"
-                        href={`/blog/posts/${post.slug}/#`}>Read More</a>
+                      {post.external_link 
+                        ? <a class="text-orange-500 text-lg font-bold block hover:underline cursor-pointer rounded-lg px-2 py-1 mt-2 hover:(bg-blue-500 text-white)" href={linkToPost} target="_blank">Read More</a>
+                        : <a class="text-orange-500 text-lg font-bold block hover:underline cursor-pointer rounded-lg px-2 py-1 mt-2 hover:(bg-blue-500 text-white)" href={linkToPost}>Read More</a>
+                      }
                 </div>
             </div>
         </div>
