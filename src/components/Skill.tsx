@@ -24,7 +24,7 @@ export default (props:{name: string, points: number, years?:number}) => {
         {pointsArray.map((point) => (
           <div
             key={point}
-            className={`rounded min-w-5 min-h-5 ${ point > props.points ? 'bg-transparent' : colors[point - 1]}`}
+            className={`rounded min-w-2 min-h-2 ${ point > props.points ? 'bg-transparent' : colors[point - 1]}`}
           >
           </div>
         ))}

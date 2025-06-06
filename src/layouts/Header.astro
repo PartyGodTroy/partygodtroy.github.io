@@ -13,8 +13,9 @@ const links = [
 ];
 ---
 
-<script defer>
-    document.querySelectorAll("nav a").forEach((el) => {
+<script>
+    document.querySelectorAll("nav a").forEach((_) => {
+      const el = _ as HTMLElement
       el.classList.toggle(
         "active",
         el.dataset.path === window.location.pathname ||
@@ -115,7 +116,7 @@ const links = [
   }
   header {
     height: var(--nav-height);
-    @apply bg-white box-border overflow-hidden fixed top-0 w-screen z-10 border-b-2 border-orange-500;
+    @apply bg-white box-border overflow-hidden fixed top-0 w-screen z-30 border-b-2 border-orange-500;
   }
 
   nav {

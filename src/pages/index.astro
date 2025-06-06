@@ -17,10 +17,10 @@ export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexO
 		</div>
 	</Hero>
 	<div class="mx-auto max-w-[1280px] p-5 " >
-		<div>
+		<div class=" max-w-7xl mx-auto">
 			<h2 class="text-4xl mb-5 font-bold">Tags</h1>
 		</div>
-		<div class="mb-5 flex gap-3 flex-wrap " id="tag_container">
+		<div class="mb-5 flex gap-3 flex-wrap  max-w-7xl mx-auto" id="tag_container">
 			<button data-tag="latest"  
 				name="Latest Post Tag" 
 				onclick="selectTag(event)"
@@ -37,7 +37,8 @@ export const tags = posts.map( p => p.tags).flat().filter( (v, i, a) => a.indexO
 					  </button>
 			})}
 		</div>
-		<div class="grid xl:grid-cols-2 gap-6 blog-listing-tl" id="post_container" >
+
+		<div class="grid xl:grid-cols-2 gap-6 blog-listing-tl  max-w-7xl mx-auto" id="post_container" >
 			{posts.map( p =>{
 				return <BlogPostPreview post={p} />
 			})}

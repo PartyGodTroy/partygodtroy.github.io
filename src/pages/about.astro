@@ -39,10 +39,10 @@ import SkillSection from "@/components/SkillSection.astro";
     </div>
   </Hero>
   <section class="max-w-[1280px] mx-auto px-4 lg:px-0">
-    <div class="my-10">
+    <div class="my-10  max-w-7xl mx-auto">
       <h2 class="text-4xl leading-9 font-bold site-name">Professional Work</h2>
     </div>
-    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4 max-w-7xl mx-auto">
       <PortfolioPiece
         title="Brunnerworks.com"
         summary="Brunnerworks site built with Next.js, Vercel, and Builder.io"
@@ -99,13 +99,13 @@ import SkillSection from "@/components/SkillSection.astro";
           alt: "advect webcomponent website",
         }}
       />
-    </div>
       <hr />
+    </div>
 
-    <div class="my-10">
+    <div class="my-10  max-w-7xl mx-auto">
       <h2 class="text-4xl leading-9 font-bold site-name">Code Pens</h2>
     </div>
-    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4">
+    <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-col-1 mb-4 gap-4  max-w-7xl mx-auto">
       <PortfolioPiece
         title="Content Drawer"
         summary="Component for building and sharing webcomponents"
@@ -155,10 +155,12 @@ import SkillSection from "@/components/SkillSection.astro";
           ></path>
         </svg>
       </a>
-    </div>
       <hr />
+    </div>
 
   </section>
-  <SkillSection  />
+  <div class="max-w-7xl mx-auto">
+    <SkillSection  />
+  </div>
 
 </Layout>
