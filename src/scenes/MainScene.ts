@@ -1,3 +1,4 @@
+import { getWindowScrollAmount } from "@/utils/scroll";
 import {
   AppendSceneAsync,
   ArcRotateCamera,
@@ -15,19 +16,17 @@ import { Scene } from "@babylonjs/core/scene";
 import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
 
 export default class MainScene extends Scene {
-
   camera: FreeCamera;
-
+  scrollAmount = 0;
 
   constructor(engine: Engine) {
     super(engine);
 
-        this.camera = new FreeCamera("camera1", new Vector3(-5, 10, 10), this);
-        this.camera.setTarget(Vector3.Zero());
-        this.camera.attachControl(true);
+    this.camera = new FreeCamera("camera1", new Vector3(-5, 10, 10), this);
+    this.camera.setTarget(Vector3.Zero());
+    this.camera.attachControl(true);
 
-
-    registerBuiltInLoaders()
+    registerBuiltInLoaders();
     this.setup().then(() => {
       this.createScene();
     });
@@ -47,17 +46,24 @@ export default class MainScene extends Scene {
         }
       }
     });
+
+    const onScroll = () => {
+      this.scrollAmount = getWindowScrollAmount();
+      console.log('scroll ended:',this.scrollAmount)
+    };
+    window.addEventListener("scrollend", onScroll);
   }
 
   private async createScene() {
     // Load the scene.glb file
-   await AppendSceneAsync('/3d/scene.glb',this)
-        const startCam = this.getNodeByName('CameraContainer') as TransformNode
-        this.camera.position =startCam.position
-        this.camera.setTarget(Vector3.Zero());
+    await AppendSceneAsync("/3d/scene.glb", this);
+    const startCam = this.getNodeByName("CameraContainer") as TransformNode;
+    this.camera.position.copyFrom(startCam.position);
+    this.camera.setTarget(Vector3.Zero());
 
-        console.log("GLB loaded successfully!");
-
+    this.onBeforeRenderObservable.add(() => {
+      this.camera.position.x = startCam.position.x + this.scrollAmount * 1000;
+    });
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     var light = new HemisphericLight("light", new Vector3(0, 1, 0), this);

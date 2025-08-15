@@ -10,28 +10,14 @@ const CanvasComponent: React.FC = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    function getWindowScrollAmount() {
-      const docElem = window.document.documentElement;
-      const docBody = window.document.body;
-      const scrollTop =
-        window.pageYOffset || docElem.scrollTop || docBody.scrollTop;
-      const scrollBottom =
-        (docElem.scrollHeight || docBody.scrollHeight) - window.innerHeight;
-      const scrollPercent = scrollTop / scrollBottom || 0;
-      return scrollPercent;
-    }
-
     const canvas = canvasRef.current;
 
     const onResize = () => {
       engine.resize();
     };
-    const onScroll = () => {
-      
-    };
+ 
 
     window.addEventListener("resize", onResize);
-    window.addEventListener("scroll", onScroll);
 
     const engine = new Engine(canvasRef.current, true, {
       preserveDrawingBuffer: true,
@@ -51,7 +37,6 @@ const CanvasComponent: React.FC = () => {
       engine.stopRenderLoop();
       engine.dispose();
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 

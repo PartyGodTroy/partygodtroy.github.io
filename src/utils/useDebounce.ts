@@ -16,4 +16,18 @@ function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue;
 }
 
+
+
+
 export default useDebounce;
+
+// Non-React debounce function
+export function debounce<T extends (...args: any[]) => any>(func: T, wait: number) {
+  let timeout: ReturnType<typeof setTimeout> | null;
+  return function(this: any, ...args: Parameters<T>) {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}
