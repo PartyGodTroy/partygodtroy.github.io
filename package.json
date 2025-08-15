@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@babylonjs/gui": "^8.23.1",
+    "@babylonjs/loaders": "^8.23.1",
+    "@babylonjs/materials": "^8.23.1",
+    "@babylonjs/post-processes": "^8.23.1",
     "@tailwindcss/vite": "^4.1.12",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
@@ -17,5 +21,9 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "@babylonjs/core": "^8.23.1",
+    "@babylonjs/inspector": "^8.23.1"
   }
 }

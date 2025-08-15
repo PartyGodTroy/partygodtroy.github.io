@@ -1,20 +1,29 @@
 ---
-import Canvas from "@/components/Canvas.astro";
+import Canvas from "@/components/canvas/Canvas.astro";
 import "@/styles/globals.css";
+
+const { siteHeight } = Astro.props;
 ---
 
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body class="relative">
-        <Canvas />
-		<h1>Astro</h1>
-        <slot />
-	</body>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Astro</title>
+  </head>
+  <body class="relative max-w-[1920px] mx-auto overflow-x-hidden">
+    <slot name="header" />
+    <Canvas />
+    <slot />
+    <slot name="footer" />
+    <script define:vars={{ siteHeight }}>
+      document.body.style.height = `calc(${siteHeight}px + 100dvh)`;
+    </script>
+  </body>
 </html>
