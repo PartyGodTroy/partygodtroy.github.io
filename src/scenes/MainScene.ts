@@ -1,4 +1,4 @@
-import { getWindowScrollAmount } from "@/utils/scroll";
+import { getBodyScrollAmount } from "@/utils/scroll";
 import {
   AppendSceneAsync,
   ArcRotateCamera,
@@ -48,10 +48,10 @@ export default class MainScene extends Scene {
     });
 
     const onScroll = () => {
-      this.scrollAmount = getWindowScrollAmount();
+      this.scrollAmount = getBodyScrollAmount();
       console.log('scroll ended:',this.scrollAmount)
     };
-    window.addEventListener("scrollend", onScroll);
+    document.body.addEventListener("scroll", onScroll);
   }
 
   private async createScene() {
@@ -62,7 +62,7 @@ export default class MainScene extends Scene {
     this.camera.setTarget(Vector3.Zero());
 
     this.onBeforeRenderObservable.add(() => {
-      this.camera.position.x = startCam.position.x + this.scrollAmount * 1000;
+      this.camera.position.x = startCam.position.x + (1 - this.scrollAmount) * 100;
     });
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)

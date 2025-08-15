@@ -3,9 +3,19 @@ import Header from "@/components/header/Header.astro";
 import Footer from "@/components/footer/Footer.astro";
 
 import Layout from "../layouts/Layout.astro";
+import Hero from "@/components/section/Hero.astro";
+import EmptySection from "@/components/section/EmptySection.astro";
+
 ---
+
 <Layout siteHeight={4000}>
-	<Header slot="header" />
-	<h1>Astro</h1>
-	<Footer slot="footer"/>
+  <Header slot="header" />
+  <Hero />
+  <EmptySection />
+  <EmptySection />
+  <EmptySection />
+  <EmptySection />
+  <EmptySection />
+
+  <Footer slot="footer" />
 </Layout>

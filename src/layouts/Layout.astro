@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 const { siteHeight } = Astro.props;
 ---
 
-<html lang="en" >
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -17,13 +17,10 @@ const { siteHeight } = Astro.props;
     />
     <title>Astro</title>
   </head>
-  <body class="relative max-w-[1920px] mx-auto overflow-x-hidden">
-    <slot name="header" />
+  <body>
     <Canvas />
+    <slot name="header" />
     <slot />
     <slot name="footer" />
-    <script define:vars={{ siteHeight }}>
-      document.body.style.height = `calc(${siteHeight}px + 100dvh)`;
-    </script>
   </body>
 </html>
