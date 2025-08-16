@@ -4,33 +4,50 @@ import { FaCodepen, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const HeaderComponent: React.FC = () => {
   const [siteSections, setSiteSections] = useState<SiteSectionDesc[]>([]);
-  
-  useEffect(()=>{
-    const timer = setInterval(()=>{
-        if ((window as any).siteSections){
-          setSiteSections((window as any).siteSections);
-          clearInterval(timer);
+  const [selectedSection, setSelectedSection] = useState<SiteSectionDesc>();
+
+  useEffect(() => {
+    const initialDataTimer = setInterval(() => {
+      if ((window as any).siteSections) {
+        setSiteSections((window as any).siteSections);
+        clearInterval(initialDataTimer);
+      }
+    }, 200);
+
+    const checkSelectedSection = setInterval(() => {
+      if ((window as any).selectedSection) {
+        if (selectedSection != (window as any).selectedSection){
+          setSelectedSection((window as any).selectedSection);
         }
-    },200)
-  },[])
+      }
+    }, 200);
+
+    return () => {
+      clearInterval(initialDataTimer);
+      clearInterval(checkSelectedSection);
+    };
+  }, []);
 
   return (
     <header>
       <nav>
         <div className="navbar bg-base-100 justify-between shadow-sm">
           <div className="flex-none">
-            <a className="btn btn-ghost text-xl">Ventroy Rolle</a>
+            <a className="btn btn-ghost text-xl" href="#section-hero">
+              Ventroy Rolle
+            </a>
           </div>
           <div className="flex-none">
             <ul className="menu menu-horizontal px-1">
               {siteSections.map((section) => {
                 return (
-                  <li>
+                  <li key={section.name}>
                     <a
-                      title={section.name ?? ''}
+                      title={section.name ?? ""}
                       href={`#section-${section.index}`}
+                      className={`${selectedSection?.name && selectedSection.name == section.name ? 'font-bold' : ''} transition-all`}
                     >
-                      {section.name ?? ''}
+                      {section.name ?? ""}
                     </a>
                   </li>
                 );

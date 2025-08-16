@@ -111,7 +111,9 @@ export default class MainScene extends Scene {
   }
 
   private startSection(el:HTMLElement ){
+    // the hero shouldnt trigger this
     const sectionLookup = this.sections.find((sectionDesc) => sectionDesc.el === el);
+    (window as any).selectedSection = sectionLookup;
     if (sectionLookup){
       const {el, index, node, camera} = sectionLookup;
       // Do some animation
