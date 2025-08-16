@@ -1,16 +1,11 @@
-import { getColor4FromCSSVariable, parseHex } from "@/utils/colors";
+import type { SiteSectionDesc } from "@/lib/SiteSectionDesc";
+import { parseHex } from "@/utils/colors";
 import { getBodyScrollAmount } from "@/utils/scroll";
 import {
   AppendSceneAsync,
-  ArcRotateCamera,
   Camera,
-  Color3,
-  Color4,
   FreeCamera,
   HemisphericLight,
-  MeshBuilder,
-  Node,
-  SceneLoader,
   TransformNode,
   Vector3,
   type Engine,
@@ -19,13 +14,7 @@ import { Scene } from "@babylonjs/core/scene";
 import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
 
 
-interface SiteSectionDesc {
-    el: Element | null;
-    index: string;
-    node: Node;
-    camera: Camera | null;
-    name: string | null
-  }
+
 
 
 export default class MainScene extends Scene {
@@ -117,7 +106,8 @@ export default class MainScene extends Scene {
         });
       });
 
-      console.log(this.sections)
+      // A little nasty code to allow the header to see the sections
+      (window as any).siteSections = this.sections;
   }
 
   private startSection(el:HTMLElement ){
