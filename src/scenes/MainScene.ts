@@ -1,12 +1,15 @@
+import { getColor4FromCSSVariable, parseHex } from "@/utils/colors";
 import { getBodyScrollAmount } from "@/utils/scroll";
 import {
   AppendSceneAsync,
   ArcRotateCamera,
+  Camera,
   Color3,
   Color4,
   FreeCamera,
   HemisphericLight,
   MeshBuilder,
+  Node,
   SceneLoader,
   TransformNode,
   Vector3,
@@ -14,6 +17,16 @@ import {
 } from "@babylonjs/core";
 import { Scene } from "@babylonjs/core/scene";
 import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
+
+
+interface SiteSectionDesc {
+    el: Element | null;
+    index: string;
+    node: Node;
+    camera: Camera | null;
+    name: string | null
+  }
+
 
 export default class MainScene extends Scene {
   camera: FreeCamera;
@@ -46,15 +59,22 @@ export default class MainScene extends Scene {
         }
       }
     });
+    document.body.addEventListener('scrollsnapchange', (event) => {
+      const snapTargetBlock = (event as any).snapTargetBlock;
+      if (snapTargetBlock != event.target){
+        this.startSection(snapTargetBlock)
+      }
+    });
 
     const onScroll = () => {
       this.scrollAmount = getBodyScrollAmount();
-      console.log('scroll ended:',this.scrollAmount)
     };
     document.body.addEventListener("scroll", onScroll);
+    this.clearColor = parseHex("#15191e");
   }
 
   private async createScene() {
+    this.getEngine().hideLoadingUI();
     // Load the scene.glb file
     await AppendSceneAsync("/3d/scene.glb", this);
     const startCam = this.getNodeByName("CameraContainer") as TransformNode;
@@ -62,7 +82,8 @@ export default class MainScene extends Scene {
     this.camera.setTarget(Vector3.Zero());
 
     this.onBeforeRenderObservable.add(() => {
-      this.camera.position.x = startCam.position.x + (1 - this.scrollAmount) * 100;
+      this.camera.position.x =
+        startCam.position.x + (1 - this.scrollAmount) * 100;
     });
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
@@ -70,5 +91,40 @@ export default class MainScene extends Scene {
 
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 0.7;
+    this.generateSections();
+  }
+
+  sections: SiteSectionDesc[] = [];
+
+  private generateSections() {
+    this.getNodes()
+      .filter((node) => node.name.indexOf("section.") != -1)
+      .forEach((node) => {
+        const nodeName = node.name.toLocaleLowerCase();
+        const index = nodeName.split(".")?.[1];
+        const el = document.querySelector(
+          `[data-section='section-${index}']`
+        );
+        const camera = node.getDescendants(true, (child) => {
+          return child.name.toLowerCase().indexOf("camera") != -1;
+        })?.[0] as Camera | null;
+        this.sections.push({
+          el,
+          index,
+          node,
+          camera,
+          name: node?.metadata?.gltf?.extras?.name,
+        });
+      });
+
+      console.log(this.sections)
+  }
+
+  private startSection(el:HTMLElement ){
+    const sectionLookup = this.sections.find((sectionDesc) => sectionDesc.el === el);
+    if (sectionLookup){
+      const {el, index, node, camera} = sectionLookup;
+      // Do some animation
+    }
   }
 }

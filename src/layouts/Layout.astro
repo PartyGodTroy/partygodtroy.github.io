@@ -1,8 +1,7 @@
 ---
 import Canvas from "@/components/canvas/Canvas.astro";
+import Filters from "@/components/svg/Filters.astro";
 import "@/styles/globals.css";
-
-const { siteHeight } = Astro.props;
 ---
 
 <html lang="en">
@@ -18,6 +17,7 @@ const { siteHeight } = Astro.props;
     <title>Astro</title>
   </head>
   <body>
+    <Filters />
     <Canvas />
     <slot name="header" />
     <slot />

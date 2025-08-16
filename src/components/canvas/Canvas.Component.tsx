@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import { Engine, Scene } from "@babylonjs/core";
 import MainScene from "@/scenes/MainScene";
 
-
 const CanvasComponent: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -13,9 +12,10 @@ const CanvasComponent: React.FC = () => {
     const canvas = canvasRef.current;
 
     const onResize = () => {
-      engine.resize();
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      engine.resize(true);
     };
- 
 
     window.addEventListener("resize", onResize);
 
@@ -24,8 +24,9 @@ const CanvasComponent: React.FC = () => {
       stencil: true,
     });
 
-    const scene = new MainScene(engine);
+    engine.hideLoadingUI();
 
+    const scene = new MainScene(engine);
 
     engine.runRenderLoop(() => {
       scene.render();
@@ -40,7 +41,7 @@ const CanvasComponent: React.FC = () => {
     };
   }, []);
 
-  return <canvas className="min-w-screen min-h-screen" ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef}></canvas>;
 };
 
 export default CanvasComponent;

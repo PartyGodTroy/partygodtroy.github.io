@@ -4,18 +4,17 @@ import Footer from "@/components/footer/Footer.astro";
 
 import Layout from "../layouts/Layout.astro";
 import Hero from "@/components/section/Hero.astro";
-import EmptySection from "@/components/section/EmptySection.astro";
+import SnapSection from "@/components/section/SnapSection.astro";
 
 ---
 
-<Layout siteHeight={4000}>
+<Layout>
   <Header slot="header" />
   <Hero />
-  <EmptySection />
-  <EmptySection />
-  <EmptySection />
-  <EmptySection />
-  <EmptySection />
+  <SnapSection sectionId="000" />
+  <SnapSection sectionId="001" />
+  <SnapSection sectionId="002" />
+  <SnapSection sectionId="003" />
 
   <Footer slot="footer" />
 </Layout>
