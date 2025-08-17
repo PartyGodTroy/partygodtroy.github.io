@@ -1,7 +1,7 @@
 ---
 const id = `section-${Astro.props.sectionId}`
 ---
-<section class="w-screen h-screen flex justify-center items-center" id={id} data-section={id}>
+<section class="w-screen min-h-screen flex justify-center items-center" id={id} data-section={id}>
     <slot>
         <h2 class="text-3xl">Hello</h2>
     </slot>

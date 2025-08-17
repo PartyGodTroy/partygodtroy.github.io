@@ -9,7 +9,6 @@ export interface SiteSectionDesc {
     el: Element | null;
     index: string;
     node: Node;
-    camera: Camera | null;
     name: string | null
   }
 

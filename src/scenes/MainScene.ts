@@ -1,4 +1,5 @@
 import type { SiteSectionDesc } from "@/lib/SiteSectionDesc";
+import { createLerpPositionKeyframes, createLerpRotationKeyframes } from "@/utils/animation";
 import { parseHex } from "@/utils/colors";
 import { getBodyScrollAmount } from "@/utils/scroll";
 import {
@@ -8,14 +9,11 @@ import {
   HemisphericLight,
   TransformNode,
   Vector3,
+  Animation,
   type Engine,
 } from "@babylonjs/core";
 import { Scene } from "@babylonjs/core/scene";
 import { registerBuiltInLoaders } from "@babylonjs/loaders/dynamic";
-
-
-
-
 
 export default class MainScene extends Scene {
   camera: FreeCamera;
@@ -48,10 +46,10 @@ export default class MainScene extends Scene {
         }
       }
     });
-    document.body.addEventListener('scrollsnapchange', (event) => {
+    document.body.addEventListener("scrollsnapchange", (event) => {
       const snapTargetBlock = (event as any).snapTargetBlock;
-      if (snapTargetBlock != event.target){
-        this.startSection(snapTargetBlock)
+      if (snapTargetBlock != event.target) {
+        this.startSection(snapTargetBlock);
       }
     });
 
@@ -91,32 +89,30 @@ export default class MainScene extends Scene {
       .forEach((node) => {
         const nodeName = node.name.toLocaleLowerCase();
         const index = nodeName.split(".")?.[1];
-        const el = document.querySelector(
-          `[data-section='section-${index}']`
-        );
-        const camera = node.getDescendants(true, (child) => {
-          return child.name.toLowerCase().indexOf("camera") != -1;
-        })?.[0] as Camera | null;
+        const el = document.querySelector(`[data-section='section-${index}']`);
+   
         this.sections.push({
           el,
           index,
           node,
-          camera,
           name: node?.metadata?.gltf?.extras?.name,
         });
       });
 
-      // A little nasty code to allow the header to see the sections
-      (window as any).siteSections = this.sections;
+    // A little nasty code to allow the header to see the sections
+    (window as any).siteSections = this.sections;
   }
 
-  private startSection(el:HTMLElement ){
+  private startSection(el: HTMLElement) {
     // the hero shouldnt trigger this
-    const sectionLookup = this.sections.find((sectionDesc) => sectionDesc.el === el);
+    const sectionLookup = this.sections.find(
+      (sectionDesc) => sectionDesc.el === el
+    );
     (window as any).selectedSection = sectionLookup;
-    if (sectionLookup){
-      const {el, index, node, camera} = sectionLookup;
-      // Do some animation
+    if (sectionLookup) {
+      const { el, index, node, name } = sectionLookup;
+
+   
     }
   }
 }

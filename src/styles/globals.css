@@ -1,20 +1,24 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-:root{
---site-gradient: linear-gradient(to right, #3f2b96, #a8c0ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+:root {
+  --site-gradient: linear-gradient(
+    to right,
+    #3f2b96,
+    #a8c0ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 html {
-    @apply w-screen h-screen overflow-clip;
+  @apply w-screen h-screen overflow-clip max-w-[1920px] mx-auto;
 }
 body {
-  @apply pt-16 w-full h-[calc(100dvh-70px)] max-h-screen overflow-y-scroll overflow-x-clip mt-[30px];
+  @apply pt-16 w-full h-[calc(100dvh-70px)] max-h-screen overflow-x-clip mt-[30px] max-w-[1920px] mx-auto;
   scroll-snap-type: y mandatory;
   scrollbar-width: thin;
   scrollbar-gutter: stable;
   scroll-behavior: smooth;
+  overflow-y: overlay;
 }
 header {
   @apply h-20 fixed top-0 left-0 w-full z-20;
@@ -25,13 +29,87 @@ section {
   scroll-snap-align: center;
 }
 
-
-
 .site-heading {
   background-image: var(--site-gradient);
   background-size: 200%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-    filter: url(#white-outline);
+  filter: url(#white-outline);
+}
+
+.grid-bg {
+  background-attachment: fixed;
+  --line-color: var(--color-sky-800);
+  --line-width: 1px;
+  background-size: 40px 40px; /* Controls the size of each grid cell */
+  background-image: linear-gradient(to right, var(--line-color) var(--line-width), transparent var(--line-width)),
+    /* Vertical lines */ linear-gradient(to bottom, var(--line-color) var(--line-width), transparent var(--line-width)); /* Horizontal lines */
+}
+
+p + p{
+  @apply mt-4
+}
+
+.scroll-gutter{
+  scrollbar-gutter: stable;
+}
+
+
+.fade-in-left {
+  position:relative;
+  animation-timeline: view();
+  animation-range: 100px contain;
+  animation-name: fade-in-left;
+  animation-fill-mode: both;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    left:-50vw;
+  }
+
+  to {
+    opacity: 1;
+    left:0;
+  
+  }
+}
+
+
+
+.fade-in-bottom {
+  position:relative;
+  animation-timeline: view();
+  animation-range: 100px contain;
+  animation-name: fade-in-bottom;
+  animation-fill-mode: both;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+}
+
+@keyframes fade-in-bottom {
+  from {
+    opacity: 0;
+    top: 10vh;
+  }
+
+  to {
+    opacity: 1;
+    top:0;
+  
+  }
+}
+
+
+
+
+.swiper-pagination-bullet{
+  @apply !w-3.5 !h-3.5 !bg-white;
+}
+
+.swiper-pagination-bullet-active{
+  @apply !w-3.5 !h-3.5 !bg-blue-500;
+  
 }

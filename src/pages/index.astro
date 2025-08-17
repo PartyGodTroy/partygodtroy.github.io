@@ -5,17 +5,25 @@ import Footer from "@/components/footer/Footer.astro";
 import Layout from "../layouts/Layout.astro";
 import Hero from "@/components/section/Hero.astro";
 import SnapSection from "@/components/section/SnapSection.astro";
-
+import Bio from "@/components/bio/Bio.astro";
+import Carousel from "@/components/carousel/Carousel.astro";
+import Projects from "@/components/projects/Projects.astro";
 ---
 
 <Layout>
   <Header slot="header" />
   <SnapSection sectionId="hero">
-  <Hero />
+    <Hero />
   </SnapSection>
-  <SnapSection sectionId="000" />
-  <SnapSection sectionId="001" />
-  <SnapSection sectionId="002" />
+  <SnapSection sectionId="000">
+    <Bio></Bio>
+  </SnapSection>
+  <SnapSection sectionId="001">
+    <Carousel />
+  </SnapSection>
+  <SnapSection sectionId="002">
+    <Projects />
+  </SnapSection>
   <SnapSection sectionId="003" />
 
   <Footer slot="footer" />

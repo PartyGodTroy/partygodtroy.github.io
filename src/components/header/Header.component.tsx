@@ -34,7 +34,7 @@ const HeaderComponent: React.FC = () => {
         <div className="navbar bg-base-100 justify-between shadow-sm">
           <div className="flex-none">
             <a className="btn btn-ghost text-xl" href="#section-hero">
-              Ventroy Rolle
+              Home
             </a>
           </div>
           <div className="flex-none">

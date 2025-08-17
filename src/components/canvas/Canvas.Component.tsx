@@ -41,7 +41,7 @@ const CanvasComponent: React.FC = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} className="grid-bg scroll-gutter"></canvas>;
 };
 
 export default CanvasComponent;
